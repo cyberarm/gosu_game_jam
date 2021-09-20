@@ -1,4 +1,4 @@
-![BANNER IMAGE](images/png/itch_banner.png)
+![BANNER IMAGE](images/png/google_forms_banner.png)
 # ABOUT
 Join in on the first **Gosu Game Jam!** It has been talked about for over 3 years and now its HAPPENING!
 
