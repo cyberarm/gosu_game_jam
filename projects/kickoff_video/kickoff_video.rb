@@ -5,6 +5,7 @@ require_relative "lib/slides/slide_zero"
 require_relative "lib/slides/slide_one"
 require_relative "lib/slides/slide_two"
 require_relative "lib/slides/slide_three"
+require_relative "lib/slides/slide_four"
 
 class GosuGameJamLaunchVideo
   class Window < CyberarmEngine::Window
