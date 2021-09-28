@@ -16,18 +16,18 @@ class GosuGameJamLaunchVideo
 
         @showcase = [
           {
-            game_name: "GAME ONE",
-            author: "AUTHOR ONE",
+            game_name: "jCaster",
+            author: "Jahmaican",
             background: 0xff_000080
           },
           {
-            game_name: "GAME TWO",
-            author: "AUTHOR TWO",
+            game_name: "Super Bombinhas",
+            author: "Victor David Santos",
             background: 0xff_008000
           },
           {
-            game_name: "GAME THREE",
-            author: "AUTHOR THREE",
+            game_name: "I-MIC RTS",
+            author: "Cyberarm",
             background: 0xff_800000
           }
         ]
@@ -37,6 +37,10 @@ class GosuGameJamLaunchVideo
 
         @showcase.each do |hash|
           @cards << generate_card(hash[:game_name], hash[:author])
+        end
+
+        @cards.each_with_index do |card, i|
+          card.save("#{ROOT_PATH}/projects/kickoff_video/data/card_#{i}.png")
         end
 
         @out_going_animator = CyberarmEngine::Animator.new(
@@ -91,7 +95,7 @@ class GosuGameJamLaunchVideo
       end
 
       def generate_card(game_name, author)
-        width = 512
+        width = 600
         height = 128
 
         padding_x = 32
@@ -99,7 +103,7 @@ class GosuGameJamLaunchVideo
         shadow_size = 2
 
         Gosu.render(width, height) do
-          @card_background_image.draw(0, 0, 0)
+          @card_background_image.draw(0, 0, 0, 1, 1, 0xee_ffffff)
 
           @game_name_font.draw_text(game_name, padding_x + shadow_size, padding_y + shadow_size, 0, 1, 1, Gosu::Color::WHITE)
           @game_name_font.draw_text(game_name, padding_x, padding_y, 0, 1, 1, Gosu::Color::BLACK)
