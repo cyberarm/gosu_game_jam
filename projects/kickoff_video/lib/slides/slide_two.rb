@@ -105,11 +105,11 @@ class GosuGameJamLaunchVideo
         Gosu.render(width, height) do
           @card_background_image.draw(0, 0, 0, 1, 1, 0xee_ffffff)
 
-          @game_name_font.draw_text(game_name, padding_x + shadow_size, padding_y + shadow_size, 0, 1, 1, Gosu::Color::WHITE)
-          @game_name_font.draw_text(game_name, padding_x, padding_y, 0, 1, 1, Gosu::Color::BLACK)
+          @game_name_font.draw_text(game_name, padding_x + shadow_size, padding_y + shadow_size, 0, 1, 1, Gosu::Color::BLACK)
+          @game_name_font.draw_text(game_name, padding_x, padding_y, 0, 1, 1, Gosu::Color::WHITE)
 
-          @author_font.draw_text(author, padding_x + shadow_size, padding_y + @game_name_font.height + shadow_size, 0, 1, 1, Gosu::Color::WHITE)
-          @author_font.draw_text(author, padding_x, padding_y + @game_name_font.height, 0, 1, 1, Gosu::Color::BLACK)
+          @author_font.draw_text(author, padding_x + shadow_size, padding_y + @game_name_font.height + shadow_size, 0, 1, 1, Gosu::Color::BLACK)
+          @author_font.draw_text(author, padding_x, padding_y + @game_name_font.height, 0, 1, 1, Gosu::Color::WHITE)
 
           Gosu.draw_rect(width - 8, 0, 8, height, 0x88_000000)
         end
