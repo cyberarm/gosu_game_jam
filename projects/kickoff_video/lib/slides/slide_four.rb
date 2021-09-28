@@ -22,9 +22,9 @@ class GosuGameJamLaunchVideo
         )
 
         @date_text = slide_text(
-          "October 00th 2021 — 00:00:00 UTC\nOctober 00th 2021 — 23:59:59 UTC",
+          "Starting October 17 at 00:00 UTC",
           font: "TerminessTTF Nerd Font",
-          size: 72,
+          size: 64,
           color: Gosu::Color.new(0x00_000000),
           shadow: true,
           shadow_color: Gosu::Color.new(0x00_ffffff),
@@ -126,7 +126,7 @@ class GosuGameJamLaunchVideo
         @inaugural_text.y = (window.height / 2 - @gosu_game_jam_logo.height) * @inaugural_text_animator.transition
 
         @date_text.x = window.width / 2 - @date_text.width / 2
-        @date_text.y = window.height / 2 + @gosu_game_jam_logo.height * 0.65
+        @date_text.y = window.height / 2 + @gosu_game_jam_logo.height * 0.7
 
         color = Gosu::Color.rgba(
           @date_text.color.red,
