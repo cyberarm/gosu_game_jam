@@ -18,33 +18,23 @@ class GosuGameJamThemeRevealVideo
       )
 
       @themes = [
-        "Dessert",
-        "Stealthy",
-        "Don't Kill Anything",
-        "It Never Ends",
-        "Racing",
-        "Don't Touch",
-        "The Hero is Drunk",
-        "Logic",
-        "Chaos",
-        "Alone",
-        "Cleaning",
         "Sports",
         "Giraffe",
+        "Don't Touch",
+        "Cleaning",
         "Puzzle",
+        "Racing",
         "Beyond the Wall",
+        "Logic",
+        "Alone",
+        "Dessert",
         "Construction",
-        "!!! TEST !!!",
+        "The Hero is Drunk",
+        "Stealthy",
+        "It Never Ends",
+        "Don't Kill Anything",
+        "Chaos"
       ]
-
-      @theme_winner = "!!! TEST !!!"
-      @themes.delete(@theme_winner)
-
-      @themes.shuffle!
-      @themes.shuffle!
-      @themes.shuffle!
-
-      @themes.push(@theme_winner) # Put winning theme on buttom of stack
 
       @theme_index = 0
 
