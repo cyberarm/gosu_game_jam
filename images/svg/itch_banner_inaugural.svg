@@ -7,11 +7,8 @@
    viewBox="0 0 166.6875 132.29167"
    version="1.1"
    id="svg5"
-   sodipodi:docname="itch_banner.svg"
+   sodipodi:docname="itch_banner_inaugural.svg"
    inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
-   inkscape:export-filename="/home/cyberarm/Nextcloud/Documents/GosuGameJam/images/png/itch_banner.png"
-   inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -387,6 +384,22 @@
        x="0"
        y="-7.1054274e-15"
        clip-path="url(#clipPath103535)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.4px;line-height:1.25;font-family:'TerminessTTF Nerd Font';-inkscape-font-specification:'TerminessTTF Nerd Font Bold';fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text150101"
+       y="28.843817"
+       x="31.085564"><tspan
+         id="tspan150099"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.4px;font-family:'TerminessTTF Nerd Font';-inkscape-font-specification:'TerminessTTF Nerd Font Bold';fill:#ffffff;stroke-width:0.264583">Inaugural</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.4px;line-height:1.25;font-family:'TerminessTTF Nerd Font';-inkscape-font-specification:'TerminessTTF Nerd Font Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text117415"
+       y="28.31465"
+       x="30.556396"><tspan
+         id="tspan117413"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.4px;font-family:'TerminessTTF Nerd Font';-inkscape-font-specification:'TerminessTTF Nerd Font Bold';fill:#000000;stroke-width:0.264583">Inaugural</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1.05833335;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 5.2916668,5.2916668 H 161.39584 V 127 H 5.2916668 Z"
