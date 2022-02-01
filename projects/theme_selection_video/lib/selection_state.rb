@@ -30,10 +30,14 @@ class GosuGameJamThemeSelectionVideo
         @theme_votes[theme] = 0
       end
 
-      @sorted_themes = @themes.clone
+      @sorted_themes = []
+
+      @theme_index = 0
+
+      @saved_themes = false
 
       @small_theme_font = Gosu::Font.new(48, name: "TerminessTTF Nerd Font")
-      @theme_font = Gosu::Font.new(96, name: "TerminessTTF Nerd Font")
+      @theme_font = Gosu::Font.new(56, name: "TerminessTTF Nerd Font")
 
       @theme_selection_time = 10_000 # ms
       @theme_selection_interval = 500 # ms
@@ -51,13 +55,21 @@ class GosuGameJamThemeSelectionVideo
       @born_at = Gosu.milliseconds
 
       @bg_scale = [@background_image.width / window.width.to_f, @background_image.height / window.height.to_f].max
+
+      @theme_lister_animator = CyberarmEngine::Animator.new(
+        start_time: @born_at,
+        duration: 30,
+        from: 0.0,
+        to: 1.0,
+        tween: :linear
+      )
     end
 
     def draw
       @background_image.draw(0, 0, -2, @bg_scale, @bg_scale, 0xff_999999)
 
-      _draw_theme_selection_
-      # _draw_selected_themes_
+      _draw_theme_selection_ if @theme_voting_rounds_total < @theme_voting_rounds
+      _draw_selected_themes_ if @theme_voting_rounds_total >= @theme_voting_rounds
 
       _draw_
 
@@ -104,8 +116,6 @@ class GosuGameJamThemeSelectionVideo
 
       @sorted_themes.each_slice(@themes_per_column).each_with_index do |themes, column|
         themes.each_with_index do |theme, i|
-          theme_width = @small_theme_font.text_width(theme)
-
           # Shadow
           @small_theme_font.draw_text(
             theme,
@@ -114,7 +124,7 @@ class GosuGameJamThemeSelectionVideo
             -1,
             1,
             1,
-            0xee_000000
+            0xff_000000
           )
 
           # Main Text
@@ -125,7 +135,7 @@ class GosuGameJamThemeSelectionVideo
             -1,
             1,
             1,
-            0xaa_ffffff
+            0xff_ffffff
           )
         end
 
@@ -134,29 +144,42 @@ class GosuGameJamThemeSelectionVideo
     end
 
     def _draw_selected_themes_
-      @themes.each_with_index do |theme, i|
-        theme_width = @theme_font.text_width(theme)
+      widest_theme = @sorted_themes[0...@theme_selection_count].map { |t| @theme_font.text_width(t) }.max.ceil
+      themes_height = @theme_font.height * @theme_selection_count
 
+      @q ||= -1
+
+      if @theme_lister_animator.complete?
+        @theme_lister_animator.instance_variable_set(:"@start_time", Gosu.milliseconds)
+        @theme_lister_animator.instance_variable_set(:"@duration", 1_000)
+
+        @q += 1
+        @q = @theme_selection_count if @q > @theme_selection_count
+      end
+
+      return if @q <= 0
+
+      @sorted_themes[0...@q].each_with_index do |theme, i|
         # Shadow
         @theme_font.draw_text(
           theme,
-          window.width / 2 - theme_width / 2 + 2,
-          (window.height / 2 - @theme_font.height / 2) + (@theme_font.height * (i - @theme_index)) + 2,
+          window.width / 2 - widest_theme / 2 + 2,
+          (window.height / 2 - themes_height / 2) + (@theme_font.height * i + 2),
           -1,
           1,
           1,
-          0x88_ffffff
+          0xff_000000
         )
 
         # Main Text
         @theme_font.draw_text(
           theme,
-          window.width / 2 - theme_width / 2,
-          (window.height / 2 - @theme_font.height / 2) + (@theme_font.height * (i - @theme_index)),
+          window.width / 2 - widest_theme / 2,
+          (window.height / 2 - themes_height / 2) + (@theme_font.height * i),
           -1,
           1,
           1,
-          0x88_000000
+          0xff_ffffff
         )
       end
     end
@@ -164,13 +187,33 @@ class GosuGameJamThemeSelectionVideo
     def update
       super
 
+      if @theme_lister_animator.complete? && @theme_index < @themes.count
+        @theme_lister_animator.instance_variable_set(:"@start_time", Gosu.milliseconds)
+        @theme_selection_last_interval = Gosu.milliseconds
+
+        @sorted_themes << @themes[@theme_index]
+        @theme_index += 1
+      end
+
+      return unless @theme_index >= @themes.count
+
       if @theme_voting_rounds_total < @theme_voting_rounds
         @theme_votes_per_cycle.times do
-          @themes.sample(@theme_selection_count).each do |theme|
-            @theme_votes[theme] += 1
-          end
+          break if @theme_voting_rounds_total == @theme_voting_rounds
+
+          @theme_votes[@themes.sample] += 1
 
           @theme_voting_rounds_total += 1
+        end
+      else
+        unless @saved_themes
+          File.open("#{File.expand_path("..", __dir__)}/selected_themes.txt", "w") do |file|
+            @sorted_themes[0...@theme_selection_count].each do |theme|
+              file.write("#{theme}\n")
+            end
+          end
+
+          @saved_themes = true
         end
       end
 
