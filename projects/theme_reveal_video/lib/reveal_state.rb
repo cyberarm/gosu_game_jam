@@ -18,22 +18,21 @@ class GosuGameJamThemeRevealVideo
       )
 
       @themes = [
-        "Sports",
-        "Giraffe",
-        "Don't Touch",
-        "Cleaning",
-        "Puzzle",
-        "Racing",
-        "Beyond the Wall",
-        "Logic",
-        "Alone",
-        "Dessert",
-        "Construction",
-        "The Hero is Drunk",
-        "Stealthy",
-        "It Never Ends",
-        "Don't Kill Anything",
-        "Chaos"
+        "Summer", #       1
+        "Perspective", #  3
+        "Steampunk", #    3
+        "Slippery", #     3
+        "Grim", #         5
+        "Growing", #      5
+        "Dessert", #      6
+        "Racing", #       6
+        "Don't Touch", #  7
+        "Ruby", #         7
+        "Construction", # 8
+        "Logic", #        8
+        "Adventure", #    8
+        "Ant", #          10
+        "Castles", #      12
       ]
 
       @theme_index = 0

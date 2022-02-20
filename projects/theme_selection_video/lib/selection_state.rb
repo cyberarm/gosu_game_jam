@@ -217,7 +217,7 @@ class GosuGameJamThemeSelectionVideo
         end
       end
 
-      if Gosu.milliseconds - @theme_selection_last_interval >= @theme_selection_interval
+      if !@saved_themes && Gosu.milliseconds - @theme_selection_last_interval >= @theme_selection_interval
         @theme_selection_last_interval = Gosu.milliseconds
 
         @sorted_themes = sort_themes
