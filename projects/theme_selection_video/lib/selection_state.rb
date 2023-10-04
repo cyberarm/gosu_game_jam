@@ -49,8 +49,26 @@ class GosuGameJamThemeSelectionVideo
       @theme_votes_per_cycle = ((@theme_voting_rounds / (((1.0 / window.update_interval) * 1000.0)) / (@theme_selection_time / 1000.0))).round
       @theme_voting_rounds_total = 0
       @theme_selection_columns = 3
-      @themes_per_column = (@themes.count / @theme_selection_columns.to_f).ceil
+      @themes_per_column = 20 #(@themes.count / @theme_selection_columns.to_f).ceil
       @widest_theme = @themes.map { |t| @small_theme_font.text_width(t) }.max.ceil
+      @widest_theme = 512 if @widest_theme > 512
+
+      @trimmed_themes = {}
+      @themes.each do |theme|
+        text = theme
+
+        if @small_theme_font.text_width(text) > @widest_theme
+          text_length = text.length
+
+          while @small_theme_font.text_width(text) > @widest_theme
+            text_length -= 1
+
+            text = "#{text[0..(text_length - 1)]}..."
+          end
+        end
+
+        @trimmed_themes[theme] = text
+      end
 
       @born_at = Gosu.milliseconds
 
@@ -111,33 +129,39 @@ class GosuGameJamThemeSelectionVideo
     end
 
     def _draw_theme_selection_
-      x = window.width / 2 - ((@widest_theme + FRAME_PADDING) * @theme_selection_columns) / 2
-      y = window.height / 2 - (@themes_per_column * @small_theme_font.height) / 2
+      x = FRAME_PADDING + FRAME_THICKNESS + FRAME_PADDING # window.width / 2 - ((@widest_theme + FRAME_PADDING) * @theme_selection_columns) / 2
+      y = FRAME_PADDING + FRAME_THICKNESS + FRAME_PADDING / 2 # window.height / 2 - (@themes_per_column * @small_theme_font.height) / 2
 
       @sorted_themes.each_slice(@themes_per_column).each_with_index do |themes, column|
-        themes.each_with_index do |theme, i|
-          # Shadow
-          @small_theme_font.draw_text(
-            theme,
-            x + 2,
-            y + (@small_theme_font.height * i) + 2,
-            -1,
-            1,
-            1,
-            0xff_000000
-          )
+        Gosu.clip_to(x - 2, 0, 512, window.height) do
+          themes.each_with_index do |theme, i|
+            text = @trimmed_themes[theme]
 
-          # Main Text
-          @small_theme_font.draw_text(
-            theme,
-            x,
-            y + (@small_theme_font.height * i),
-            -1,
-            1,
-            1,
-            0xff_ffffff
-          )
+            # Shadow
+            @small_theme_font.draw_text(
+              text,
+              x + 2,
+              y + (@small_theme_font.height * i) + 2,
+              -1,
+              1,
+              1,
+              0xff_000000
+            )
+
+            # Main Text
+            @small_theme_font.draw_text(
+              text,
+              x,
+              y + (@small_theme_font.height * i),
+              -1,
+              1,
+              1,
+              0xff_ffffff
+            )
+          end
         end
+
+        break if column >= 2
 
         x += @widest_theme + FRAME_PADDING
       end
