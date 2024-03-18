@@ -1,4 +1,4 @@
-!# For Gosu Game Jam 5
+!# For Gosu Game Jam 6
 
 Adventure
 Run and Gun
@@ -48,6 +48,8 @@ You're Not Supposed To Be Here
 Growing
 Choose A Path
 Limited Space
+Warehouse
+Working Simulator
 
 Future
 Past
@@ -63,7 +65,6 @@ The Hero is Drunk
 
 Maze
 Canons
-Asteroids
 Economy
 Zoo
 Rogue

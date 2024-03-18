@@ -18,21 +18,21 @@ class GosuGameJamThemeRevealVideo
       )
 
       @themes = [
-        "Beyond the Wall",
-        "Couch Game",
-        "Puzzle",
-        "Board Game",
-        "Maze",
-        "Cleaning",
-        "Time",
+        "Hunger",
+        "Do No Harm",
         "Gemstone",
-        "Alone",
+        "Logic",
         "Arena",
-        "Retro",
-        "Past",
+        "Board Game",
+        "Day and Night",
         "Colony",
-        "Ant",
-        "Platformer",
+        "Forest",
+        "Growing",
+        "Connected Worlds",
+        "Maze",
+        "Destroy The System",
+        "Don't Stop Moving",
+        "Asteroids"
       ]
 
       @theme_index = 0
